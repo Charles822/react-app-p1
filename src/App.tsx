@@ -4,7 +4,7 @@ function App() {
   const items = ["New York", "Los Angeles", "San Fransisco"]
     return (
       <div>
-        <ListGroup heading="Miami" items={items} onSelectItem={() => console.log(item)}></ListGroup>
+        <ListGroup heading="Miami" items={items} onSelectItem={() => console.log('active')}></ListGroup>
       </div>
     );
 }
