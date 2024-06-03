@@ -13,7 +13,7 @@ interface ListItemProps {
 
 const ListItem = styled.li<ListItemProps>`
 	padding: 5px;
-	background: ${props => props.active ? "blue" : "none"};
+	background: ${(props) => (props.active ? "blue" : "none")};
 `;
 
 interface Props {
