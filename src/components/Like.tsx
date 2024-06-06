@@ -10,7 +10,7 @@ const Like = ({ onClick }: Props) => {
 
 	const toggle = () => {
 		setStatus(!status);
-		console.log('la bite');
+		onClick();
 	}
 
 	if (status)
