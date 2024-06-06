@@ -2,21 +2,19 @@ import {useState} from "react";
 import Button from "./components/Button";
 
 function App() {
-  const [game, setGame] = useState({
-    id: 1,
-    player: {
-      name: 'John',
-    },
+  const [pizza, setPizza] = useState({
+    name: 'Spicy Pepperoni',
+    toppings: ['Mushroom']
 
   });
     
   const handleClick = () => {
-    setGame({ ...game, player: {...game.player, name: 'Rodrigo'} })
+    setPizza({ ...pizza, toppings: [...pizza.toppings, 'Pepperoni'] })
   }
     return (
       <div>
         <Button onClick={handleClick}>Change name</Button>
-        <p>{console.log({game})}</p>
+        <p>{console.log({pizza})}</p>
       </div>
     );
 }
