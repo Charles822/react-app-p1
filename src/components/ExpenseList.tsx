@@ -5,33 +5,17 @@ interface ListItemProps {
 }
 
 interface Props {
-	display: boolean; 
-	// displayAll: () => void; 
-	//displayGroceries: () => void;
-	// displayUtilities: () => void;
-	// displayEntertainment: () => void;
+	items: [];
+	onClear: (item: object) => void;
 }
 
-function ExpenseList({ display }: Props) {
-	const items = [
-	{
-		description: "Milk",
-		amount: 5,
-		categories: 'Groceries'
-	},
-	{	
-		description: "Soap",
-		amount: 2,
-		categories: 'Utilities'
+function ExpenseList({ items, onClear }: Props) {
 
-	}
-	]
 
 	let total = 0;
 	for (let item of items)
 		total += item.amount;
-	
-	
+
 
 	return (
 		<table className="table">
@@ -49,7 +33,7 @@ function ExpenseList({ display }: Props) {
 			      <td>{item.description}</td>
 			      <td>{item.amount}</td>
 			      <td>{item.categories}</td>
-			      <td><button>Delete</button></td>
+			      <td><button type="button" className="btn btn-outline-danger" onClick={() => onClear(item)}>Delete</button></td>
 			    </tr>
 			  	))}
 		    <tr>
