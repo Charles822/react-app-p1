@@ -3,6 +3,7 @@ import Form from "./components/Form";
 import ExpenseList from "./components/ExpenseList";
 import ExpenseFilter from "./components/ExpenseFilter";
 import ExpenseForm from "./components/ExpenseForm";
+import Stack from '@mui/material/Stack';
 
 let allItems = [];
 
@@ -10,14 +11,21 @@ function App() {
 
   const [items, setItems] = useState(allItems);
 
-  const [selectCategory, setSelectedCategory] = useState("All Categories");
+  const [selectedCategory, setSelectedCategory] = useState("All Categories");
 
   const handleFilterAllCategories = () => {
     setItems(allItems);
   };
 
-  const handleFilterCategory = (category) => {
-    setItems(allItems.filter((item) => item.categories === category));
+  const handleFilterCategory = (value: string) => {
+    setSelectedCategory(value);
+    if (value === "All Categories") {
+      setItems(allItems);
+    }
+
+    else {
+      setItems(allItems.filter((item) => item.categories === value));
+    }
   };
 
   const handleDeleteItem = (item: object) => {
@@ -28,37 +36,22 @@ function App() {
 
   const handleAddItem = (data: object) => {
     allItems = [...allItems, data];
-    if (selectCategory === data.categories || selectCategory === "All Categories")
+    if (selectedCategory === data.categories || selectedCategory === "All Categories")
       setItems([...items, data]);
     
 
   };
 
   return (
-    <>
-      <ExpenseForm onTransfer={handleAddItem} />
+    <Stack spacing={5}>
+      <ExpenseForm onTransfer={handleAddItem}/>
 
       <ExpenseFilter
-        header={selectCategory}
-        onHeader={() => {
-          setSelectedCategory("All Categories");
-          handleFilterAllCategories();
-        }}
-        onGroceries={() => {
-          setSelectedCategory("Groceries");
-          handleFilterCategory("Groceries");
-        }}
-        onUtilities={() => {
-          setSelectedCategory("Utilities");
-          handleFilterCategory("Utilities");
-        }}
-        onEntertainment={() => {
-          setSelectedCategory("Entertainment");
-          handleFilterCategory("Entertainment");
-        }}
+        category={selectedCategory}
+        onSelect={handleFilterCategory}
       />
       <ExpenseList items={items} onClear={handleDeleteItem} />
-    </>
+    </Stack>
   );
 }
 
