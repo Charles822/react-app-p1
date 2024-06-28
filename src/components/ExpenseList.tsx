@@ -1,9 +1,5 @@
 import { useState } from "react";
 
-interface ListItemProps {
-	active: boolean;
-}
-
 interface Props {
 	items: [];
 	onClear: (item: object) => void;
